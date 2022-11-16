@@ -109,7 +109,7 @@ jobs:
             # and run that image in a container that's pushed to heroku
             usedocker: true
 
-  deploy_docker_image_to_ECR:
+  push_to_AWS_ECR:
     name: Deploy docker image to AWS ECR
     runs-on: ubuntu-latest
 
@@ -133,7 +133,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ${{ secrets.AWS_REPO_NAME }}
-        IMAGE_TAG: lastest
+        IMAGE_TAG: latest
       run: |
         # Build a docker container and push it to ECR 
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
